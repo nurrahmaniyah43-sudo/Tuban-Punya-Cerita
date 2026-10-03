@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TUBAN PUNYA CERITA - Portal Wisata Tuban</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Plus Jakarta Sans & Caveat for handwriting -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        handwriting: ['"Caveat"', 'cursive'],
+                    },
+                    colors: {
+                        skybrand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .sky-hero-bg {
+            background: linear-gradient(180deg, #1d4ed8 0%, #0284c7 50%, #38bdf8 85%, #f0f9ff 100%);
+        }
+        .card-shadow {
+            box-shadow: 0 10px 25px -5px rgba(2, 132, 199, 0.08);
+        }
+        .glass-badge {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-sky-500 selection:text-white">
+
+    <header class="sticky top-0 z-50 bg-sky-900/95 backdrop-blur-md text-white border-b border-sky-800/60 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between py-3 md:h-20 gap-3">
+                <!-- Brand Logo & Title -->
+                <div class="flex items-center space-x-3 cursor-pointer" onclick="resetFilters()">
+                    <div class="w-10 h-10 rounded-2xl bg-white text-sky-600 flex items-center justify-center shadow-md transform -rotate-6 hover:rotate-0 transition-transform duration-300">
+                        <i class="fa-solid fa-paper-plane text-lg"></i>
+                    </div>
+                    <div>
+                        <span class="text-lg sm:text-xl font-extrabold tracking-tight text-white block">
+                            TUBAN PUNYA CERITA
+                        </span>
+                        <span class="text-[10px] sm:text-xs font-semibold text-sky-200 tracking-widest uppercase block -mt-1">
+                            Portal Eksplorasi Wisata Tuban
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Top Class Filter Tabs -->
+                <div class="flex items-center space-x-1 sm:space-x-2 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
+                    <button onclick="filterByClass('all')" class="top-class-btn px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-sky-500 text-white shadow-sm" data-class="all">
+                        Semua Kelas
+                    </button>
+                    <button onclick="filterByClass('rufaidah')" class="top-class-btn px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-sky-800/80 text-sky-200 hover:bg-sky-700 hover:text-white" data-class="rufaidah">
+                        Rufaidah
+                    </button>
+                    <button onclick="filterByClass('nusaibah')" class="top-class-btn px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-sky-800/80 text-sky-200 hover:bg-sky-700 hover:text-white" data-class="nusaibah">
+                        Nusaibah
+                    </button>
+                    <button onclick="filterByClass('saad')" class="top-class-btn px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-sky-800/80 text-sky-200 hover:bg-sky-700 hover:text-white" data-class="saad">
+                        Sa'ad
+                    </button>
+                    <button onclick="filterByClass('abu_ubaidah')" class="top-class-btn px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-sky-800/80 text-sky-200 hover:bg-sky-700 hover:text-white" data-class="abu_ubaidah">
+                        Abu Ubaidah
+                    </button>
+                    <button onclick="resetFilters()" class="px-2.5 py-1.5 rounded-xl text-xs font-bold text-sky-300 hover:text-white transition-all ml-1 shrink-0" title="Reset Semua Filter">
+                        <i class="fa-solid fa-rotate-left mr-1"></i>Reset
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="relative sky-hero-bg text-white pt-10 pb-28 sm:pt-14 sm:pb-36 px-4 overflow-hidden">
+        <div class="max-w-4xl mx-auto text-center relative z-10 space-y-4">
+            <!-- Badge -->
+            <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full glass-badge text-white text-xs sm:text-sm font-semibold tracking-wide uppercase shadow-lg">
+                <i class="fa-solid fa-compass text-amber-300"></i>
+                <span>Eksplorasi Pesona Bumi Asri</span>
+            </div>
+
+            <!-- Main Heading -->
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white drop-shadow-md leading-none">
+                TUBAN PUNYA CERITA
+            </h1>
+
+            <!-- Cursive Subtitle -->
+            <p class="font-handwriting text-2xl sm:text-4xl text-sky-100 drop-shadow max-w-2xl mx-auto leading-tight">
+                Temukan Uniknya Bumi Asri Nan Mempesona
+            </p>
+
+            <!-- Poetry / Poem Quote -->
+            <div class="max-w-xl mx-auto text-sm sm:text-base font-medium text-sky-100/90 leading-relaxed italic bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/20 shadow-xl">
+                <p>"Pesona Untuk Nikmati Yang Ada,"</p>
+                <p>"Cerita Eksplorasi Ragam Indahnya Tuban Asli."</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="max-w-6xl mx-auto px-4 -mt-20 sm:-mt-24 relative z-30 mb-10">
+        <div class="bg-white rounded-3xl p-5 sm:p-7 shadow-2xl border border-sky-100 space-y-5">
+            
+            <!-- Direct Search Bar -->
+            <div>
+                <label class="block text-xs font-extrabold uppercase tracking-wider text-slate-400 mb-2">
+                    <i class="fa-solid fa-magnifying-glass mr-1 text-sky-500"></i> Cari Nama Wisata:
+                </label>
+                <div class="flex flex-col sm:flex-row gap-2">
+                    <div class="relative flex-grow">
+                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-sky-600">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                        <input type="text" id="searchInput" onkeyup="if(event.key==='Enter') executeSearch()" 
+                               placeholder="Ketik nama wisata (contoh: Nglirip, Bonang, Semilir, Goa, Krawak)..." 
+                               class="w-full pl-11 pr-10 py-3.5 bg-slate-50 border border-slate-200 rounded-2xl text-slate-800 placeholder-slate-400 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-sky-500 focus:bg-white transition-all">
+                        <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute right-3 top-3.5 text-slate-400 hover:text-slate-600">
+                            <i class="fa-solid fa-circle-xmark text-lg"></i>
+                        </button>
+                    </div>
+
+                    <!-- Search Button -->
+                    <button onclick="executeSearch()" class="px-7 py-3.5 bg-sky-600 hover:bg-sky-700 text-white text-sm font-bold rounded-2xl transition-all shadow-md flex items-center justify-center space-x-2 shrink-0">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <span>Cari Wisata</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Category Quick Filters -->
+            <div class="flex items-center space-x-2 overflow-x-auto pt-2 border-t border-slate-100 scrollbar-none">
+                <span class="text-xs font-bold text-slate-400 shrink-0 mr-1">Kategori:</span>
+                <button onclick="filterByCategory('all')" class="cat-chip-btn px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-sky-100 text-sky-800 border border-sky-200" data-category="all">
+                    Semua
+                </button>
+                <button onclick="filterByCategory('Pantai')" class="cat-chip-btn px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-slate-100 text-slate-600 hover:bg-sky-50" data-category="Pantai">
+                    <i class="fa-solid fa-umbrella-beach mr-1 text-sky-500"></i> Pantai
+                </button>
+                <button onclick="filterByCategory('Religi')" class="cat-chip-btn px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-slate-100 text-slate-600 hover:bg-sky-50" data-category="Religi">
+                    <i class="fa-solid fa-kaaba mr-1 text-amber-500"></i> Religi
+                </button>
+                <button onclick="filterByCategory('Air Terjun')" class="cat-chip-btn px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-slate-100 text-slate-600 hover:bg-sky-50" data-category="Air Terjun">
+                    <i class="fa-solid fa-water mr-1 text-teal-500"></i> Air Terjun
+                </button>
+                <button onclick="filterByCategory('Goa')" class="cat-chip-btn px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-slate-100 text-slate-600 hover:bg-sky-50" data-category="Goa">
+                    <i class="fa-solid fa-mountain-sun mr-1 text-stone-600"></i> Goa
+                </button>
+                <button onclick="filterByCategory('Eco Park')" class="cat-chip-btn px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-slate-100 text-slate-600 hover:bg-sky-50" data-category="Eco Park">
+                    <i class="fa-solid fa-leaf mr-1 text-emerald-500"></i> Eco Park
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 w-full">
+        <!-- Section Header Bar -->
+        <div class="flex items-center justify-between mb-8 pb-3 border-b border-slate-200">
+            <div>
+                <span id="currentFilterTitle" class="text-xs font-extrabold uppercase tracking-wider text-sky-600 block mb-0.5">
+                    Menampilkan Semua Wisata
+                </span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
+                    DESTINASI PARIWISATA TUBAN
+                </h2>
+            </div>
+            <div>
+                <span id="statTotal" class="px-4 py-2 bg-sky-100 text-sky-800 text-xs font-extrabold rounded-2xl border border-sky-200 shadow-sm">
+                    29 Wisata
+                </span>
+            </div>
+        </div>
+
+        <!-- Dynamic Destination Containers -->
+        <div id="destinationsContainer" class="space-y-12">
+            <!-- Dynamic elements loaded via JavaScript -->
+        </div>
+
+        <!-- No Results Fallback Card -->
+        <div id="noResults" class="hidden text-center py-16 bg-white rounded-3xl border border-dashed border-slate-300 shadow-sm">
+            <div class="w-16 h-16 bg-sky-50 text-sky-500 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl">
+                <i class="fa-solid fa-compass"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-800 mb-1">Wisata Tidak Ditemukan</h3>
+            <p class="text-slate-500 text-xs max-w-md mx-auto mb-6">
+                Tidak ada lokasi wisata yang cocok dengan kata kunci atau filter yang Anda pilih.
+            </p>
+            <button onclick="resetFilters()" class="px-6 py-2.5 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-xl text-xs transition-all shadow">
+                Reset Semua Filter
+            </button>
+        </div>
+    </main>
+
+    <footer class="bg-slate-950 text-slate-400 py-10 px-4 border-t border-slate-900">
+        <div class="max-w-7xl mx-auto text-center space-y-4">
+            <div class="flex justify-center items-center space-x-2">
+                <div class="w-8 h-8 rounded-lg bg-sky-600 text-white flex items-center justify-center font-bold">
+                    <i class="fa-solid fa-paper-plane text-xs"></i>
+                </div>
+                <span class="text-lg font-extrabold text-white tracking-tight">TUBAN PUNYA CERITA</span>
+            </div>
+            <p class="text-xs text-slate-500 max-w-xl mx-auto">
+                Portal direktori wisata digital hasil karya apresiasi siswa. Menampilkan pesona kekayaan wisata alam, religi, sejarah, dan ekowisata Kabupaten Tuban, Jawa Timur.
+            </p>
+            <div class="text-[11px] text-slate-600 pt-4 border-t border-slate-900">
+                © 2026 Tuban Punya Cerita. SMP Techno Insan Kamil.
+            </div>
+        </div>
+    </footer>
+
+    <div id="previewModal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-2 sm:p-4">
+        <div class="bg-white w-full max-w-5xl h-[90vh] rounded-3xl shadow-2xl flex flex-col overflow-hidden border border-slate-200">
+            <!-- Modal Header -->
+            <div class="px-6 py-4 bg-sky-900 text-white flex items-center justify-between">
+                <div class="flex items-center space-x-3 overflow-hidden">
+                    <span id="modalCategoryBadge" class="px-3 py-1 rounded-full text-xs font-bold bg-sky-500 text-white">
+                        Wisata
+                    </span>
+                    <h3 id="modalTitle" class="text-base sm:text-lg font-extrabold truncate text-white">
+                        Nama Wisata
+                    </h3>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <a id="modalExternalBtn" href="#" target="_blank" rel="noopener noreferrer" class="px-3.5 py-1.5 bg-amber-400 hover:bg-amber-300 text-slate-950 text-xs font-bold rounded-xl flex items-center space-x-1.5 transition-all shadow">
+                        <span>Tab Baru</span>
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                    <button onclick="closePreviewModal()" class="w-8 h-8 rounded-xl bg-sky-800 hover:bg-sky-700 text-white flex items-center justify-center transition-all">
+                        <i class="fa-solid fa-xmark text-base"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Modal Body Frame -->
+            <div class="flex-grow relative bg-slate-100">
+                <div id="iframeLoader" class="absolute inset-0 flex flex-col items-center justify-center bg-slate-100 text-slate-500 space-y-3">
+                    <i class="fa-solid fa-spinner animate-spin text-3xl text-sky-600"></i>
+                    <span class="text-sm font-semibold text-slate-600">Memuat website destinasi...</span>
+                </div>
+                <iframe id="previewIframe" src="" class="w-full h-full border-none relative z-10" onload="hideIframeLoader()"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 hidden transform transition-all duration-300 translate-y-10 opacity-0 bg-slate-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl flex items-center space-x-3 border border-slate-700">
+        <div class="w-8 h-8 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center">
+            <i class="fa-solid fa-check"></i>
+        </div>
+        <span id="toastMsg" class="text-xs font-bold">Link berhasil disalin!</span>
+    </div>
+
+    <script>
+        const classesData = [
+            {
+                id: "rufaidah",
+                className: "Kelas Rufaidah Al Aslamiyah",
+                icon: "fa-person-shelter",
+                badgeColor: "bg-sky-100 text-sky-800 border border-sky-200",
+                items: [
+                    {
+                        title: "Makam Syekh Maulana Ibrahim Asmoroqondi",
+                        category: "Religi",
+                        desc: "Destinasi wisata religi ziarah makam ulama Islam penyebar agama di Jawa, Syekh Maulana Ibrahim Asmoroqondi.",
+                        url: "https://daltaangel8-ship-it.github.io/MAKAM-SYEKH-MAULANA-IBRAHIM.ASMOROQONDI/",
+                        imgBg: "from-amber-600 to-amber-800",
+                        iconImg: "fa-kaaba"
+                    },
+                    {
+                        title: "Pantai Semilir Tuban",
+                        category: "Pantai",
+                        desc: "Pantai berpasir putih nan tenang dengan tiupan angin sepoi-sepoi dan deretan pohon cemara yang indah.",
+                        url: "https://almairajill-byte.github.io/Semilir-BeachTuban.com/",
+                        imgBg: "from-sky-500 to-blue-700",
+                        iconImg: "fa-umbrella-beach"
+                    },
+                    {
+                        title: "Wisata Alam Goa Ngerong",
+                        category: "Goa",
+                        desc: "Goa kelelawar unik dengan sungai bawah tanah tempat ribuan ikan purba bebas berenang.",
+                        url: "https://justaina15.github.io/Wisata-Alam-Tuban-Goa-Ngerong/",
+                        imgBg: "from-stone-600 to-stone-800",
+                        iconImg: "fa-mountain-sun"
+                    },
+                    {
+                        title: "Wisata Goa Suci Tuban",
+                        category: "Goa",
+                        desc: "Goa eksotik pahatan batu alam bersejarah dengan pemandangan berkas sinar matahari 'Ray of Light' mempesona.",
+                        url: "https://nabibelazhr.github.io/Ray-of-Light.-Goa-Suci-Tuban/",
+                        imgBg: "from-amber-700 to-stone-900",
+                        iconImg: "fa-sun"
+                    },
+                    {
+                        title: "Air Terjun Putri Nglirip",
+                        category: "Air Terjun",
+                        desc: "Air terjun memukau berair hijau toska legendaris yang dikelilingi tebing batu dan pepohonan asri.",
+                        url: "https://kaylaanindyaputrisuwarsono-hub.github.io/air-terjun-putri-nglirip-tuban/",
+                        imgBg: "from-teal-500 to-emerald-700",
+                        iconImg: "fa-water"
+                    },
+                    {
+                        title: "Pantai Sowan Tuban",
+                        category: "Pantai",
+                        desc: "Ekowisata pantai dengan perpaduan hutan rimba cemara, karang, serta pemandangan laut yang asri.",
+                        url: "https://selmacantikb-alt.github.io/sowanbeach.nyaaa/",
+                        imgBg: "from-cyan-600 to-sky-800",
+                        iconImg: "fa-umbrella-beach"
+                    },
+                    {
+                        title: "Jejak Sejarah & Wisata Religi (The Footsteps of Faith)",
+                        category: "Religi",
+                        desc: "Eksplorasi jejak keimanan dan destinasi tempat-tempat bersejarah bernilai keagamaan tinggi di Tuban.",
+                        url: "https://aqilaimtinan.github.io/The-Footsteps-of-Faith/",
+                        imgBg: "from-amber-500 to-orange-700",
+                        iconImg: "fa-place-of-worship"
+                    },
+                    {
+                        title: "Pantai Cemara Tuban",
+                        category: "Pantai",
+                        desc: "Destinasi wisata pantai teduh yang dipenuhi rindang pohon cemara laut, sangat cocok untuk rekreasi.",
+                        url: "https://miyaqotrunnada12-cyber.github.io/Pantai-Cemara-Tuban/",
+                        imgBg: "from-emerald-600 to-teal-800",
+                        iconImg: "fa-tree"
+                    }
+                ]
+            },
+            {
+                id: "nusaibah",
+                className: "Kelas Nusaibah binti Ka'ab",
+                icon: "fa-star",
+                badgeColor: "bg-emerald-100 text-emerald-800 border border-emerald-200",
+                items: [
+                    {
+                        title: "Makam Sunan Bonang",
+                        category: "Religi",
+                        desc: "Wisata religi bersejarah komplek pemakaman Wali Songo Raden Makdum Ibrahim di pusat kota Tuban.",
+                        url: "http://bonangantuban.netlify.app",
+                        imgBg: "from-amber-600 to-yellow-800",
+                        iconImg: "fa-kaaba"
+                    },
+                    {
+                        title: "Pantai Dermaga Tuban",
+                        category: "Pantai",
+                        desc: "Keindahan pemandangan dermaga laut dengan spot swafoto matahari terbenam yang memukau.",
+                        url: "https://yaswara.github.io/Website-Pantai-Dermaga/",
+                        imgBg: "from-blue-600 to-indigo-800",
+                        iconImg: "fa-anchor"
+                    },
+                    {
+                        title: "Wisata Pantai Sowan",
+                        category: "Pantai",
+                        desc: "Panorama alam pesisir pantai Sowan dengan pepohonan rindang dan udara segar pesisir Tuban.",
+                        url: "https://yaswara.github.io/website-pantai-sowan/",
+                        imgBg: "from-teal-600 to-cyan-800",
+                        iconImg: "fa-umbrella-beach"
+                    },
+                    {
+                        title: "Wisata Pelang Silowo Tuban",
+                        category: "Eco Park",
+                        desc: "Destinasi ekowisata mata air jernih Silowo di tengah rindangnya kebun sagu yang alami.",
+                        url: "https://aat4a.github.io/wisatasilowo_tuban/",
+                        imgBg: "from-emerald-500 to-green-700",
+                        iconImg: "fa-leaf"
+                    },
+                    {
+                        title: "Wisata Suruan Eco Park",
+                        category: "Eco Park",
+                        desc: "Ekowisata alam susur sungai dan taman terbuka hijau nan alami, sejuk, dan mempesona.",
+                        url: "https://adindanauram7-commits.github.io/suruan/",
+                        imgBg: "from-green-600 to-teal-800",
+                        iconImg: "fa-tree"
+                    },
+                    {
+                        title: "Klenteng Kwan Sing Bio",
+                        category: "Religi",
+                        desc: "Klenteng megah seluas 3 hektar tepi laut Tuban yang terkenal sebagai salah satu klenteng terbesar di Asia Tenggara.",
+                        url: "https://wisata-klenteng-kwan-sing-bio-tuban.netlify.app/",
+                        imgBg: "from-red-600 to-rose-800",
+                        iconImg: "fa-gopuram"
+                    },
+                    {
+                        title: "Air Terjun Nglirip Tuban",
+                        category: "Air Terjun",
+                        desc: "Pesona keindahan air terjun alami dengan kolam air berwarna hijau toska menakjubkan.",
+                        url: "https://nazhipaaa.github.io/Wisata_Air-Terjun-Nglirip-Tuban/",
+                        imgBg: "from-sky-600 to-teal-700",
+                        iconImg: "fa-water"
+                    }
+                ]
+            },
+            {
+                id: "saad",
+                className: "Kelas Sa'ad bin Abi Waqash",
+                icon: "fa-shield-halved",
+                badgeColor: "bg-purple-100 text-purple-800 border border-purple-200",
+                items: [
+                    {
+                        title: "Wisata Sunan Bonang",
+                        category: "Religi",
+                        desc: "Situs bersejarah makam Sunan Bonang pusat peradaban dan dakwah Islam di Bumi Wali Tuban.",
+                        url: "https://emailutamarayyan-afk.github.io/Sunan-Bonang/",
+                        imgBg: "from-amber-600 to-amber-900",
+                        iconImg: "fa-kaaba"
+                    },
+                    {
+                        title: "Air Terjun Nglirip",
+                        category: "Air Terjun",
+                        desc: "Eksplorasi keindahan tebing dan gemercik air terjun Nglirip yang sangat populer di Tuban.",
+                        url: "https://gigagasti349-dotcom.github.io/Air-terjun-ngilirip/",
+                        imgBg: "from-teal-500 to-cyan-700",
+                        iconImg: "fa-water"
+                    },
+                    {
+                        title: "Mata Air Krawak",
+                        category: "Air Terjun",
+                        desc: "Sumber mata air alami bersumber dari tebing batu di tengah suasana hutan jati yang rindang.",
+                        url: "https://akmallubab20-ai.github.io/Mata-Air-Krawak/",
+                        imgBg: "from-blue-500 to-emerald-700",
+                        iconImg: "fa-droplet"
+                    },
+                    {
+                        title: "Wisata Pantai Panduri",
+                        category: "Pantai",
+                        desc: "Pantai cantik kekinian dengan spot santai dan wahana hiburan pantai yang seru.",
+                        url: "https://pantai-panduri-tuban.ai.studio/",
+                        imgBg: "from-sky-500 to-blue-600",
+                        iconImg: "fa-umbrella-beach"
+                    },
+                    {
+                        title: "Pantai Semilir",
+                        category: "Pantai",
+                        desc: "Destinasi wisata pesisir pantai dengan hamparan pasir bersih dan pemandangan laut yang menenteramkan.",
+                        url: "https://dhavinarya610-source.github.io/Pantai-Semilir/",
+                        imgBg: "from-cyan-500 to-blue-700",
+                        iconImg: "fa-sun"
+                    },
+                    {
+                        title: "Makam Sunan Bejagung Kidul",
+                        category: "Religi",
+                        desc: "Wisata ziarah makam Syekh Abdullah Asy'ari (Sunan Bejagung Kidul) tokoh ulama penyebar Islam.",
+                        url: "https://ferdiansyahariful-ship-it.github.io/wisata-makam-sunan-bejagung-kidul/",
+                        imgBg: "from-stone-700 to-stone-900",
+                        iconImg: "fa-place-of-worship"
+                    },
+                    {
+                        title: "Wisata Pantai Kelapa",
+                        category: "Pantai",
+                        desc: "Pantai unik berhias ribuan pohon kelapa rindang lengkap dengan arena bermain dan area kemah.",
+                        url: "https://nightgatau.github.io/Wisata-Pantai-Kelapa/",
+                        imgBg: "from-emerald-600 to-lime-700",
+                        iconImg: "fa-tree"
+                    }
+                ]
+            },
+            {
+                id: "abu_ubaidah",
+                className: "Kelas Abu Ubaidah Al Jarrah",
+                icon: "fa-flag",
+                badgeColor: "bg-rose-100 text-rose-800 border border-rose-200",
+                items: [
+                    {
+                        title: "Eksplorasi Wisata Tuban",
+                        category: "Eco Park",
+                        desc: "Portal rangkuman eksplorasi ragam keindahan destinasi wisata alam dan budaya Kabupaten Tuban.",
+                        url: "https://abiyyums84-oss.github.io/wisata/",
+                        imgBg: "from-indigo-600 to-sky-800",
+                        iconImg: "fa-compass"
+                    },
+                    {
+                        title: "Wisata Pantai Dermaga",
+                        category: "Pantai",
+                        desc: "Pesona bahari pantai dermaga dengan panorama laut Jawa dan spot swafoto menarik.",
+                        url: "https://admeire.github.io/Website-wisata-pantaidermaga-Tugaskokurikuler/",
+                        imgBg: "from-blue-600 to-teal-800",
+                        iconImg: "fa-anchor"
+                    },
+                    {
+                        title: "Wisata Masjid Agung Tuban",
+                        category: "Religi",
+                        desc: "Masjid megah bernuansa 1001 malam dengan arsitektur memukau di alun-alun pusat kota Tuban.",
+                        url: "https://websitemasjidagung.netlify.app",
+                        imgBg: "from-amber-600 to-yellow-700",
+                        iconImg: "fa-mosque"
+                    },
+                    {
+                        title: "Wisata Pemandian Bektiharjo",
+                        category: "Eco Park",
+                        desc: "Sumber mata air pemandian legendaris berair bening sejuk yang dikelilingi pepohonan tua ramah kera.",
+                        url: "https://pratamagaming853-cloud.github.io/wisata-mbektiharjo-tuban/",
+                        imgBg: "from-emerald-500 to-teal-700",
+                        iconImg: "fa-water"
+                    },
+                    {
+                        title: "Wisata Pantai Remen Tuban",
+                        category: "Pantai",
+                        desc: "Pantai unik berpasir putih dengan laguna air payau alami yang tenang dan jernih.",
+                        url: "https://riza99-creator.github.io/pantai-remen/",
+                        imgBg: "from-sky-500 to-indigo-700",
+                        iconImg: "fa-umbrella-beach"
+                    },
+                    {
+                        title: "Sumber Mata Air Krawak",
+                        category: "Air Terjun",
+                        desc: "Wisata pemandian sungai dan aliran sumber mata air Krawak yang jernih dan menyegarkan.",
+                        url: "https://alhaidarjibrani.github.io/sumbermataairkrawak/?utm_source=chatgpt.com",
+                        imgBg: "from-teal-600 to-blue-800",
+                        iconImg: "fa-droplet"
+                    },
+                    {
+                        title: "Suruan Eco Park Tuban",
+                        category: "Eco Park",
+                        desc: "Destinasi wisata hijau petualangan alam susur sungai dan rekreasi keluarga di Tuban.",
+                        url: "https://abiliverson.github.io/Website-suruan-ecopark-tuban/",
+                        imgBg: "from-green-600 to-emerald-800",
+                        iconImg: "fa-leaf"
+                    }
+                ]
+            }
+        ];
+
+        let activeClassFilter = "all";
+        let activeCategoryFilter = "all";
+        let searchQuery = "";
+
+        // DOM elements
+        const searchInput = document.getElementById("searchInput");
+        const clearSearchBtn = document.getElementById("clearSearchBtn");
+        const destinationsContainer = document.getElementById("destinationsContainer");
+        const noResults = document.getElementById("noResults");
+        const statTotal = document.getElementById("statTotal");
+        const currentFilterTitle = document.getElementById("currentFilterTitle");
+
+        function getClassNameById(id) {
+            const found = classesData.find(c => c.id === id);
+            return found ? found.className : id;
+        }
+
+        function renderDestinations() {
+            destinationsContainer.innerHTML = "";
+            let totalRendered = 0;
+
+            classesData.forEach(classGroup => {
+                // Filter by class if selected in top nav
+                if (activeClassFilter !== "all" && classGroup.id !== activeClassFilter) {
+                    return;
+                }
+
+                // Filter items by category & search query
+                const filteredItems = classGroup.items.filter(item => {
+                    const matchCategory = (activeCategoryFilter === "all" || item.category === activeCategoryFilter);
+                    const matchQuery = (searchQuery === "" || 
+                        item.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                        item.desc.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                        item.category.toLowerCase().includes(searchQuery.toLowerCase()));
+                    return matchCategory && matchQuery;
+                });
+
+                if (filteredItems.length > 0) {
+                    totalRendered += filteredItems.length;
+
+                    // Create Section per Class
+                    const classBlock = document.createElement("div");
+                    classBlock.className = "space-y-5";
+
+                    classBlock.innerHTML = `
+                        <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-2xl bg-sky-600 text-white flex items-center justify-center font-bold shadow-md">
+                                    <i class="fa-solid ${classGroup.icon}"></i>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg sm:text-xl font-extrabold text-slate-800">${classGroup.className}</h3>
+                                    <p class="text-xs text-slate-500 font-medium">${filteredItems.length} Destinasi Wisata</p>
+                                </div>
+                            </div>
+                            <span class="px-3 py-1 rounded-full text-[11px] font-bold ${classGroup.badgeColor}">
+                                ${classGroup.id.toUpperCase()}
+                            </span>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                            ${filteredItems.map(item => createCardHTML(item, classGroup.className)).join('')}
+                        </div>
+                    `;
+
+                    destinationsContainer.appendChild(classBlock);
+                }
+            });
+
+            // Update stats & fallback state
+            statTotal.textContent = `${totalRendered} Wisata`;
+
+            if (totalRendered === 0) {
+                noResults.classList.remove("hidden");
+            } else {
+                noResults.classList.add("hidden");
+            }
+
+            // Update header title
+            if (searchQuery !== "") {
+                currentFilterTitle.textContent = `Hasil Pencarian: "${searchQuery}"`;
+            } else if (activeClassFilter !== "all" && activeCategoryFilter !== "all") {
+                currentFilterTitle.textContent = `${getClassNameById(activeClassFilter)} • Kategori ${activeCategoryFilter}`;
+            } else if (activeClassFilter !== "all") {
+                currentFilterTitle.textContent = `Menampilkan ${getClassNameById(activeClassFilter)}`;
+            } else if (activeCategoryFilter !== "all") {
+                currentFilterTitle.textContent = `Kategori Wisata: ${activeCategoryFilter}`;
+            } else {
+                currentFilterTitle.textContent = "Menampilkan Semua Wisata Tuban";
+            }
+        }
+
+        function createCardHTML(item, className) {
+            let catBadgeClass = "bg-slate-100 text-slate-700";
+            if (item.category === "Pantai") catBadgeClass = "bg-sky-500 text-white";
+            if (item.category === "Religi") catBadgeClass = "bg-amber-500 text-white";
+            if (item.category === "Air Terjun") catBadgeClass = "bg-teal-500 text-white";
+            if (item.category === "Goa") catBadgeClass = "bg-stone-600 text-white";
+            if (item.category === "Eco Park") catBadgeClass = "bg-emerald-600 text-white";
+
+            return `
+                <div class="group bg-white rounded-3xl overflow-hidden border border-slate-200 hover:border-sky-400 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between">
+                    <div>
+                        <!-- Header Visual Banner -->
+                        <div class="w-full h-32 bg-gradient-to-br ${item.imgBg} flex items-center justify-center text-white relative overflow-hidden">
+                            <div class="absolute inset-0 bg-slate-900/10"></div>
+                            <i class="fa-solid ${item.iconImg} text-4xl opacity-80 group-hover:scale-110 transition-transform duration-300"></i>
+                            
+                            <!-- Category Badge -->
+                            <span class="absolute top-3 left-3 px-3 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-wider ${catBadgeClass} shadow-md">
+                                ${item.category}
+                            </span>
+                        </div>
+
+                        <!-- Card Content -->
+                        <div class="p-5">
+                            <div class="flex items-center space-x-1 text-[11px] font-semibold text-sky-600 mb-1">
+                                <i class="fa-solid fa-location-dot"></i>
+                                <span>Tuban, Jawa Timur</span>
+                            </div>
+
+                            <h3 class="text-base font-extrabold text-slate-900 group-hover:text-sky-600 transition-colors line-clamp-2 mb-2 leading-snug">
+                                ${item.title}
+                            </h3>
+
+                            <p class="text-xs text-slate-500 line-clamp-2 leading-relaxed">
+                                ${item.desc}
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="px-5 pb-5 pt-3 border-t border-slate-100 flex items-center space-x-2">
+                        <a href="${item.url}" target="_blank" rel="noopener noreferrer" 
+                           class="flex-grow py-2.5 px-3 bg-sky-600 hover:bg-sky-700 text-white rounded-2xl text-xs font-bold text-center transition-all flex items-center justify-center space-x-1.5 shadow-md shadow-sky-600/20">
+                            <span>Kunjungi</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+                        </a>
+
+                        <button onclick="openPreviewModal('${escapeHtml(item.title)}', '${item.url}', '${item.category}')" 
+                                title="Lihat Modal Preview" 
+                                class="w-10 h-10 bg-slate-100 hover:bg-sky-50 text-slate-700 hover:text-sky-600 rounded-2xl text-xs flex items-center justify-center transition-all shrink-0">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+
+                        <button onclick="copyToClipboard('${item.url}')" 
+                                title="Salin Link Website" 
+                                class="w-10 h-10 bg-slate-100 hover:bg-sky-50 text-slate-700 hover:text-sky-600 rounded-2xl text-xs flex items-center justify-center transition-all shrink-0">
+                            <i class="fa-solid fa-link"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/'/g, "\\'");
+        }
+
+        function executeSearch() {
+            searchQuery = searchInput.value.trim();
+            if (searchQuery.length > 0) {
+                clearSearchBtn.classList.remove("hidden");
+            } else {
+                clearSearchBtn.classList.add("hidden");
+            }
+            renderDestinations();
+        }
+
+        function clearSearch() {
+            searchInput.value = "";
+            searchQuery = "";
+            clearSearchBtn.classList.add("hidden");
+            renderDestinations();
+        }
+
+        function filterByClass(cls) {
+            activeClassFilter = cls;
+
+            document.querySelectorAll(".top-class-btn").forEach(btn => {
+                if (btn.dataset.class === cls) {
+                    btn.className = "top-class-btn px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-sky-500 text-white shadow-sm";
+                } else {
+                    btn.className = "top-class-btn px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-sky-800/80 text-sky-200 hover:bg-sky-700 hover:text-white";
+                }
+            });
+
+            renderDestinations();
+        }
+
+        function filterByCategory(cat) {
+            activeCategoryFilter = cat;
+
+            document.querySelectorAll(".cat-chip-btn").forEach(btn => {
+                if (btn.dataset.category === cat) {
+                    btn.className = "cat-chip-btn px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-sky-100 text-sky-800 border border-sky-200";
+                } else {
+                    btn.className = "cat-chip-btn px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all bg-slate-100 text-slate-600 hover:bg-sky-50";
+                }
+            });
+
+            renderDestinations();
+        }
+
+        function resetFilters() {
+            activeClassFilter = "all";
+            activeCategoryFilter = "all";
+            searchQuery = "";
+            if (searchInput) searchInput.value = "";
+            if (clearSearchBtn) clearSearchBtn.classList.add("hidden");
+
+            filterByClass("all");
+            filterByCategory("all");
+        }
+
+        // Preview modal functions
+        function openPreviewModal(title, url, category) {
+            const modal = document.getElementById("previewModal");
+            const modalTitle = document.getElementById("modalTitle");
+            const modalBadge = document.getElementById("modalCategoryBadge");
+            const modalExternalBtn = document.getElementById("modalExternalBtn");
+            const iframe = document.getElementById("previewIframe");
+            const loader = document.getElementById("iframeLoader");
+
+            modalTitle.textContent = title;
+            modalBadge.textContent = category;
+            modalExternalBtn.href = url;
+            if (loader) loader.style.display = "flex";
+
+            let formattedUrl = url;
+            if (!formattedUrl.startsWith("http://") && !formattedUrl.startsWith("https://")) {
+                formattedUrl = "https://" + formattedUrl;
+            }
+
+            iframe.src = formattedUrl;
+            modal.classList.remove("hidden");
+            document.body.style.overflow = "hidden";
+        }
+
+        function closePreviewModal() {
+            const modal = document.getElementById("previewModal");
+            const iframe = document.getElementById("previewIframe");
+            iframe.src = "";
+            modal.classList.add("hidden");
+            document.body.style.overflow = "auto";
+        }
+
+        function hideIframeLoader() {
+            const loader = document.getElementById("iframeLoader");
+            if (loader) loader.style.display = "none";
+        }
+
+        function copyToClipboard(text) {
+            const tempInput = document.createElement("input");
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+
+            showToast("Link destinasi berhasil disalin!");
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById("toast");
+            const toastMsg = document.getElementById("toastMsg");
+            toastMsg.textContent = msg;
+
+            toast.classList.remove("hidden");
+            setTimeout(() => {
+                toast.classList.remove("translate-y-10", "opacity-0");
+                toast.classList.add("translate-y-0", "opacity-100");
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.remove("translate-y-0", "opacity-100");
+                toast.classList.add("translate-y-10", "opacity-0");
+                setTimeout(() => {
+                    toast.classList.add("hidden");
+                }, 300);
+            }, 3000);
+        }
+
+        // Initialize display on load
+        window.onload = function() {
+            renderDestinations();
+        }
+    </script>
+</body>
+</html>
